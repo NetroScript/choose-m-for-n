@@ -13,7 +13,13 @@ module.exports = {
     ],
     daisyui: {
         themes: [
-            "business",
+            {
+                "business": {
+                    ...require("daisyui/src/colors/themes")["[data-theme=business]"],
+                    "accent": "#6366f1",
+                },
+            },
+            "corporate",
         ]
     },
     variants: {

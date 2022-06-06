@@ -1,10 +1,10 @@
 <div class="overflow-x-auto mt-3">
-    <table class="table text-center">
+    <table class="table w-full text-center">
         <thead>
         <tr>
-            {#each Array(distribution.runners) as _, i}
+            {#each Array(distribution.choices) as _, i}
                 <th
-                class:nth="{distribution.prevent_grouped_negatives && i % distribution.multiples_of_n === 0 && i !== 0}"
+                class:nth="{distribution.prevent_grouped_assignments && i % distribution.multiples_of_n === 0 && i !== 0}"
                 > {i + 1}</th>
             {/each}
 
@@ -12,14 +12,14 @@
         </thead>
         <tbody>
         <tr>
-            {#each Array(distribution.runners) as _, i}
+            {#each Array(distribution.choices) as _, i}
                 {#if distribution.distribution.has(i)}
                     <td class="bg-primary-focus"
-                        class:nth="{distribution.prevent_grouped_negatives && i % distribution.multiples_of_n === 0 && i !== 0}"
+                        class:nth="{distribution.prevent_grouped_assignments && i % distribution.multiples_of_n === 0 && i !== 0}"
                     >{distribution.distribution.get(i)}</td>
                 {:else}
                     <td
-                            class:nth="{distribution.prevent_grouped_negatives && i % distribution.multiples_of_n === 0 && i !== 0}"
+                            class:nth="{distribution.prevent_grouped_assignments && i % distribution.multiples_of_n === 0 && i !== 0}"
                     ></td>
                 {/if}
             {/each}
