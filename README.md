@@ -1,38 +1,11 @@
-# create-svelte
+# choose-m-for-n
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+This is a little visual program that helps you to randomly select n numbers and assigns then to a list of m numbers without any multiple assignments.
 
-## Creating a project
+This uses the [PCG 32-bit PRNG](https://www.pcg-random.org/index.html).
 
-If you're seeing this, you've probably already done this step. Congrats!
+This applications allows you to set multiple values. Including the seed used, the amount of choices available, and how many of those choices you want to select.
 
-```bash
-# create a new project in the current directory
-npm init svelte
+Additionally there is an option to generate groups of random numbers, where one group can have a maximum of one assigned number.
 
-# create a new project in my-app
-npm init svelte my-app
-```
-
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
-
-## Building
-
-To create a production version of your app:
-
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+This requires a browser with WebAssembly and BigInt support.
