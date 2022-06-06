@@ -1,5 +1,5 @@
 <div class="overflow-x-auto mt-3">
-    <table class="table w-full text-center">
+    <table class="table text-center">
         <thead>
         <tr>
             {#each Array(distribution.runners) as _, i}
