@@ -19,7 +19,7 @@ const config = {
 			default: true
 		},
 		paths : {
-			base: ""
+			base: "/choose-m-for-n"
 		}
 	}
 };
