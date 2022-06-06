@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" href="./favicon.png" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta http-equiv="content-security-policy" content="">
+	<link rel="stylesheet" href="/_app/immutable/assets/pages/__layout.svelte-a6a62d34.css">
+	<link rel="stylesheet" href="/_app/immutable/assets/pages/index.svelte-d68ad2d9.css">
+	<link rel="modulepreload" href="/_app/immutable/start-1ef3b27a.js">
+	<link rel="modulepreload" href="/_app/immutable/chunks/index-28df49c0.js">
+	<link rel="modulepreload" href="/_app/immutable/chunks/preload-helper-60cab3ee.js">
+	<link rel="modulepreload" href="/_app/immutable/pages/__layout.svelte-a2057682.js">
+	<link rel="modulepreload" href="/_app/immutable/pages/index.svelte-9fe48277.js">
+	</head>
+	<body>
+		<div>
+
+
+<div data-theme="business"><div class="hero bg-neutral text-neutral-content min-h-screen"><div class="hero-content mx-auto max-w-full text-center overflow-hidden"><div class="max-w-full"><h2 class="mt-20 mb-2 text-4xl font-extrabold md:text-6xl">Generate m random assignments for n possible choices
+            </h2>
+            <h3>This website is using
+                <input class="input input-ghost input-xs border-0 border-b-2 border-primary">
+                as a seed. The seed value gets randomized on every page load and cannot be changed and is only shown for
+                reproducible results.
+            </h3>
+            
+            <div class="mt-8"><div class="flex flex-col md:flex-row justify-center items-center place-items-center"><div class="bg-secondary rounded-lg px-8 py-4 shadow-lg form-control w-full max-w-md flex-column flex justify-between items-center place-items-center m-4"><label class="label"><span class="label-text text-xl text-secondary-content">Enter the amount of total choices:</span></label>
+                        <input class="input input-bordered input-primary w-full max-w-md input-lg" min="1" placeholder="Total choices" type="number" value="30"></div>
+                    <div class="bg-secondary rounded-lg px-8 py-4 shadow-lg form-control w-full max-w-md flex-column flex justify-between items-center place-items-center m-4"><label class="label"><span class="label-text text-xl text-secondary-content">Select the amount of possible assignments. (Maximum 30
+                                )</span></label>
+                        <input class="input input-bordered input-primary w-full max-w-md input-lg" max="30" min="1" placeholder="Amount of assignments" type="number" value="5"></div></div>
+
+                </div>
+
+            <div class="mt-6 mb-10 flex w-full justify-center"><div class="tooltip tooltip-primary" data-tip="This is for the use case that if you for example assign tasks to a user, that a single user should not have more than one task. If this toggle is enabled, any new random value which would be within a group of 3 which already has an assignment will be discarded."><div class="form-control"><label class="label cursor-pointer"><span class="label-text">Prevent multiple assignments in a group of <input class="input input-ghost input-xs p-0 w-3 remove-wheel border-0 border-b-2 border-primary svelte-wgup4k" type="number" value="3"> choices.</span>
+                            <input class="toggle toggle-primary ml-8" type="checkbox"></label></div></div></div>
+
+            <div class="tooltip tooltip-primary" data-tip="Algorithm 1 is a simpler, but a bit slower algorithm [For smaller numbers the difference in speed between both algorithms is negligent]. You just randomly keep drawing numbers in the range of 0-(n-1) and discard every newly generated number, if it does not fit the requirements. Algorithm 2 generates a list with all possible values. It then randomly selects a value from that list, checks if it is valid, if this is the case uses that value and removes it from the list of possible values. If it is not valid, it just picks a new random array element."><div class="form-control"><label class="label cursor-pointer"><span class="label-text">Algorithm 1.</span>
+                        <input class="toggle toggle-primary mx-8 bg-primary border-primary" type="checkbox" checked>
+                        <span class="label-text">Algorithm 2.</span></label></div></div>
+
+            <div class="mt-6 mb-10"><div class="flex flex-col md:flex-row justify-center "><div class="flex justify-center m-2"><div class="btn btn-primary btn-wide">Generate distribution</div></div>
+                    
+                    </div></div>
+
+            
+
+            
+
+            <div class="collapse collapse-arrow border border-base-300 bg-base-100 rounded-box"><div class="collapse-title text-xl font-medium cursor-pointer">Click to get more information about how this works.
+                </div>
+                <div class="collapse-content text-left overflow-hidden"><div class="p-6"><p>This application allows you to generate random distributions to assign m values to n possible choices. Assuming you know the seed and do the same actions, every sequence of distributions is reproducible.
+                        </p>
+                        <p>You can export the generated distributions as a CSV file or as a JSON file.
+                        </p>
+                        <p>As source of randomness the PCG-Family - specifically the 32-bit variant - is used. The specific library used on this website can be found <a class="link link-accent" href="https://github.com/alisey/pcg32">here</a>.
+                        </p>
+                        <div>There are two algorithms available which are used to generate the assignments.
+                            <br>
+                            <br>
+                            <b>Algorithm 1</b> works the following way:
+                            <br><br>
+                            <ol class="list-decimal"><li>As long as not m assignments were made.
+                                </li>
+                                <li>Pick a random integer number in the range of 0-(n-1) (unbiased).
+                                </li>
+                                <li>Check if this number was picked before. If it was picked before do nothing and return to 2.
+                                </li>
+                                <li>Now check if we are preventing groups. If we are preventing groups, get the relative base number for our current group of n <code class="bg-base-200">(random_number - random_number % multiples_of_n)</code>. Check if relative to this number in the group of n number, a pick already was made. If there is one in this range, &quot;discard&quot; the value again and return to step 2. again.
+                                </li>
+                                <li>The current random number passsed all checks, so we can use it. Add it to the used random numbers (assign the possible value the index of the current iteration). And increase the amount of assigned numbers.
+                                </li>
+                                <br><br>
+                                <b>Algorithm 2</b> on the other hand does not always randomly draw a new number in the entire range, but keeps a list of all possible choices and draws from them.
+                                <br><br>
+                                <ol class="list-decimal"><li>Generate a list of all possible choices (0-(n-1)).
+                                    </li>
+                                    <li>As long as not m assignments were made.
+                                    </li>
+                                    <li>Pick a random integer number in the range of 0-(possible choices left - 1).
+                                    </li>
+                                    <li>Now check if we are preventing groups. If we are preventing groups, get the relative base number for our current group of n <code class="bg-base-200">possible_picks[random_index] - possible_picks[random_index] % multiples_of_n</code>. Check if relative to this number in the group of n number, a pick already was made. If there is one in this range, &quot;discard&quot; the value again and return to step 2. again.
+                                    </li>
+                                    <li>The current random number passed all checks, so we can use it. Add it to the used random numbers (assign the possible value the index of the current iteration). Next remove it from the pool of possible choices. As last step increase the amount of assigned numbers.
+                                    </li></ol>
+
+                            <br><br>
+
+                            The algorithms roughly look like this in this application:
+
+                            <div class="flex flex-col 2xl:flex-row justify-center overflow-hidden"><div class="m-4 overflow-x-auto flex-1"></div>
+                                <div class="m-4 overflow-x-auto flex-1"></div></div></ol></div></div></div></div></div></div></div>
+</div>
+
+
+		<script type="module" data-sveltekit-hydrate="1010wai">
+		import { start } from "/_app/immutable/start-1ef3b27a.js";
+		start({
+			target: document.querySelector('[data-sveltekit-hydrate="1010wai"]').parentNode,
+			paths: {"base":"","assets":""},
+			session: {},
+			route: true,
+			spa: false,
+			trailing_slash: "never",
+			hydrate: {
+				status: 200,
+				error: null,
+				nodes: [0, 2],
+				params: {},
+				routeId: ""
+			}
+		});
+	</script></div>
+	</body>
+</html>
