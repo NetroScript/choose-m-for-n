@@ -1,5 +1,7 @@
 # choose-m-for-n
 
+![](https://i.imgur.com/0gpcb7v.png)
+
 This is a little visual program that helps you to randomly select n numbers and assigns then to a list of m numbers without any multiple assignments.
 
 This uses the [PCG 32-bit PRNG](https://www.pcg-random.org/index.html).
